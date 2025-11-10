@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: /auth/
+Disallow: /admin/
+Disallow: /api/
+Sitemap: https://moji-code.com/sitemap.xml
+
+# Allow crawling of static assets
+Allow: /*.css$
+Allow: /*.js$
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.svg$
+Allow: /*.webp$
+
+# Block certain file types
+Disallow: /*.json$
+Disallow: /*.map$
+Disallow: /*.txt$
+
+# Crawl-delay to avoid server overload
+Crawl-delay: 10

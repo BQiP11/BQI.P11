@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moji Code - Trang cá nhân</title>
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/editor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f8f9fa;
+            --text-color: #2c3e50;
+            --border-color: #ddd;
+            --gradient-start: #3498db;
+            --gradient-end: #2ecc71;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            color: white;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .nav-link.active {
+            background: white;
+            color: var(--primary-color);
+        }
+
+        /* Main content */
+        .main-container {
+            max-width: 1200px;
+            margin: 80px auto 0;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+        }
+
+        /* Profile sidebar */
+        .profile-sidebar {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 100px;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .profile-info {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .profile-bio {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .stat-item {
+            padding: 10px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        /* Content feed */
+        .content-feed {
+            display: grid;
+            gap: 20px;
+        }
+
+        .create-post-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .post-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            resize: none;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f1f1f1;
+            color: var(--text-color);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .post-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .post-meta {
+            flex: 1;
+        }
+
+        .post-author {
+            font-weight: bold;
+        }
+
+        .post-time {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .post-content {
+            margin-bottom: 15px;
+        }
+
+        .post-image {
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .post-footer {
+            display: flex;
+            gap: 15px;
+        }
+
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #666;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .post-action:hover {
+            color: var(--primary-color);
+        }
+
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+        }
+
+        .loading-spinner.show {
+            display: block;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .profile-sidebar {
+                position: static;
+                margin-bottom: 20px;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">Moji Code</a>
+            <nav class="nav-menu">
+                <a href="#" class="nav-link active">Trang chủ</a>
+                <a href="#" class="nav-link">Khám phá</a>
+                <a href="#" class="nav-link">Thông báo</a>
+                <a href="#" class="nav-link">Tin nhắn</a>
+                <a href="#" class="nav-link" id="logoutBtn">Đăng xuất</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main content -->
+    <main class="main-container">
+        <!-- Profile sidebar -->
+        <aside class="profile-sidebar">
+            <img src="assets/default-avatar.jpg" alt="Avatar" class="profile-avatar" id="userAvatar">
+            <div class="profile-info">
+                <h1 class="profile-name" id="userName">Đang tải...</h1>
+                <p class="profile-bio" id="userBio">Đang tải...</p>
+            </div>
+            <div class="profile-stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="postCount">0</div>
+                    <div class="stat-label">Bài viết</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="followerCount">0</div>
+                    <div class="stat-label">Người theo dõi</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="followingCount">0</div>
+                    <div class="stat-label">Đang theo dõi</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Content feed -->
+        <div class="content-feed">
+            <!-- Create post card -->
+            <div class="create-post-card">
+                <textarea class="post-input" placeholder="Chia sẻ điều gì đó..." rows="3"></textarea>
+                <div class="post-actions">
+                    <button class="action-btn btn-secondary">
+                        <i class="fas fa-image"></i>
+                        Ảnh
+                    </button>
+                    <button class="action-btn btn-secondary">
+                        <i class="fas fa-video"></i>
+                        Video
+                    </button>
+                    <button class="action-btn btn-secondary">
+                        <i class="fas fa-code"></i>
+                        Code
+                    </button>
+                    <button class="action-btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Đăng bài
+                    </button>
+                </div>
+            </div>
+
+            <!-- Posts container -->
+            <div id="postsContainer">
+                <!-- Posts will be dynamically inserted here -->
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading spinner -->
+    <div class="loading-spinner">
+        <div class="spinner-ring"></div>
+    </div>
+
+    <script type="module">
+        import { ui } from './js/ui.js';
+        import { db } from './js/database.js';
+        import { ai } from './js/ai.js';
+        import { mediaHandler } from './js/media.js';
+        import { sessionManager } from './js/session.js';
+
+        // Check authentication
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!sessionManager.isLoggedIn()) {
+                window.location.href = 'auth/login.html';
+                return;
+            }
+
+            // Load user data
+            const user = sessionManager.getCurrentUser();
+            if (user) {
+                document.getElementById('userName').textContent = `${user.firstName} ${user.lastName}`;
+                document.getElementById('userAvatar').src = user.avatar || 'assets/default-avatar.jpg';
+                
+                // Load stats
+                const posts = await db.getPosts(user.email);
+                const followers = await db.getFollowers(user.email);
+                const following = await db.getFollowing(user.email);
+
+                document.getElementById('postCount').textContent = posts.length;
+                document.getElementById('followerCount').textContent = followers.length;
+                document.getElementById('followingCount').textContent = following.length;
+
+                // Load posts
+                loadPosts();
+            }
+
+            // Handle logout
+            document.getElementById('logoutBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                sessionManager.clearSession();
+                window.location.href = 'auth/login.html';
+            });
+
+            // Setup post creation
+            setupPostCreation();
+        });
+
+        // Load posts
+        async function loadPosts() {
+            const container = document.getElementById('postsContainer');
+            const user = sessionManager.getCurrentUser();
+            
+            try {
+                ui.showLoading(container);
+                const posts = await db.getPosts(user.email);
+                
+                container.innerHTML = posts.map(post => `
+                    <div class="post-card" data-id="${post.id}">
+                        <div class="post-header">
+                            <img src="${user.avatar || 'assets/default-avatar.jpg'}" alt="" class="post-avatar">
+                            <div class="post-meta">
+                                <div class="post-author">${user.firstName} ${user.lastName}</div>
+                                <div class="post-time">${formatTime(post.timestamp)}</div>
+                            </div>
+                        </div>
+                        <div class="post-content">${post.content}</div>
+                        ${post.image ? `<img src="${post.image}" alt="" class="post-image">` : ''}
+                        <div class="post-footer">
+                            <div class="post-action like-action">
+                                <i class="far fa-heart"></i>
+                                <span>${post.likes || 0}</span>
+                            </div>
+                            <div class="post-action comment-action">
+                                <i class="far fa-comment"></i>
+                                <span>${post.comments?.length || 0}</span>
+                            </div>
+                            <div class="post-action share-action">
+                                <i class="far fa-share-square"></i>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                // Add interactions
+                setupPostInteractions();
+            } catch (error) {
+                ui.showToast('Không thể tải bài viết', 'error');
+            } finally {
+                ui.hideLoading(container);
+            }
+        }
+
+        // Setup post creation
+        function setupPostCreation() {
+            const input = document.querySelector('.post-input');
+            const imageBtn = document.querySelector('.action-btn:nth-child(1)');
+            const videoBtn = document.querySelector('.action-btn:nth-child(2)');
+            const codeBtn = document.querySelector('.action-btn:nth-child(3)');
+            const submitBtn = document.querySelector('.action-btn:nth-child(4)');
+
+            // Handle media upload
+            imageBtn.addEventListener('click', () => {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = 'image/*';
+                input.onchange = (e) => handleMediaUpload(e.target.files[0]);
+                input.click();
+            });
+
+            // Handle post submission
+            submitBtn.addEventListener('click', async () => {
+                const content = input.value.trim();
+                if (!content) {
+                    ui.showToast('Vui lòng nhập nội dung', 'error');
+                    return;
+                }
+
+                try {
+                    ui.showLoading(document.querySelector('.create-post-card'));
+                    
+                    // Analyze content with AI
+                    const analysis = await ai.analyzeContent(content);
+                    
+                    // Create post
+                    const user = sessionManager.getCurrentUser();
+                    await db.createPost({
+                        content,
+                        authorEmail: user.email,
+                        analysis,
+                        timestamp: Date.now()
+                    });
+
+                    // Clear input and reload posts
+                    input.value = '';
+                    await loadPosts();
+                    ui.showToast('Đăng bài thành công', 'success');
+                } catch (error) {
+                    ui.showToast('Không thể đăng bài', 'error');
+                } finally {
+                    ui.hideLoading(document.querySelector('.create-post-card'));
+                }
+            });
+        }
+
+        // Handle media upload
+        async function handleMediaUpload(file) {
+            try {
+                ui.showLoading(document.querySelector('.create-post-card'));
+                const optimizedImage = await mediaHandler.optimizeImage(file);
+                const imageUrl = await mediaHandler.uploadImage(optimizedImage);
+                
+                // Add image preview
+                const preview = document.createElement('div');
+                preview.className = 'media-preview';
+                preview.innerHTML = `<img src="${imageUrl}" alt="">`;
+                document.querySelector('.post-actions').before(preview);
+            } catch (error) {
+                ui.showToast('Không thể tải ảnh lên', 'error');
+            } finally {
+                ui.hideLoading(document.querySelector('.create-post-card'));
+            }
+        }
+
+        // Setup post interactions
+        function setupPostInteractions() {
+            // Like action
+            document.querySelectorAll('.like-action').forEach(btn => {
+                btn.addEventListener('click', async function() {
+                    const postId = this.closest('.post-card').dataset.id;
+                    const user = sessionManager.getCurrentUser();
+                    
+                    try {
+                        const isLiked = await db.toggleLike(postId, user.email);
+                        const icon = this.querySelector('i');
+                        const count = this.querySelector('span');
+                        
+                        if (isLiked) {
+                            icon.classList.replace('far', 'fas');
+                            count.textContent = parseInt(count.textContent) + 1;
+                        } else {
+                            icon.classList.replace('fas', 'far');
+                            count.textContent = parseInt(count.textContent) - 1;
+                        }
+                    } catch (error) {
+                        ui.showToast('Không thể thực hiện', 'error');
+                    }
+                });
+            });
+
+            // Add hover effects
+            document.querySelectorAll('.post-card').forEach(card => {
+                ui.addCardEffect(card);
+            });
+        }
+
+        // Format timestamp
+        function formatTime(timestamp) {
+            const now = new Date();
+            const date = new Date(timestamp);
+            const diff = now - date;
+            
+            if (diff < 60000) return 'Vừa xong';
+            if (diff < 3600000) return `${Math.floor(diff/60000)} phút trước`;
+            if (diff < 86400000) return `${Math.floor(diff/3600000)} giờ trước`;
+            return date.toLocaleDateString('vi-VN');
+        }
+    </script>
+</body>
+</html>

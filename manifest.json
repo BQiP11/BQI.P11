@@ -1,0 +1,47 @@
+{
+    "name": "Moji Code",
+    "short_name": "Moji",
+    "description": "Premium social content creation with AI assistance",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2c3e50",
+    "theme_color": "#2c3e50",
+    "icons": [
+        {
+            "src": "/assets/icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/assets/icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Create Post",
+            "short_name": "New Post",
+            "description": "Create a new post",
+            "url": "/#create",
+            "icons": [{ "src": "/assets/shortcut-create.png", "sizes": "192x192" }]
+        },
+        {
+            "name": "Feed",
+            "short_name": "Feed",
+            "description": "View your feed",
+            "url": "/#feed",
+            "icons": [{ "src": "/assets/shortcut-feed.png", "sizes": "192x192" }]
+        }
+    ],
+    "related_applications": [],
+    "prefer_related_applications": false,
+    "features": [
+        "Cross Platform",
+        "AI-Powered",
+        "Rich Media Support",
+        "Real-time Collaboration"
+    ]
+}

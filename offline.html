@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moji Code - Offline</title>
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .offline-container {
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .icon-container {
+            margin-bottom: 30px;
+        }
+
+        .wifi-icon {
+            width: 80px;
+            height: 80px;
+            fill: var(--error-color);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            color: var(--text-color);
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .retry-button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            outline: none;
+        }
+
+        .retry-button:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        .retry-button:active {
+            transform: translateY(0);
+        }
+
+        .cached-content {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .cached-content h2 {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .cached-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .cached-item {
+            padding: 10px 15px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cached-item i {
+            color: var(--primary-color);
+        }
+
+        .status-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: var(--error-color);
+            margin-right: 10px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 25px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .wifi-icon {
+                width: 60px;
+                height: 60px;
+            }
+        }
+
+        .connection-status {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="connection-status">
+        <span class="status-indicator"></span>
+        Offline
+    </div>
+
+    <div class="offline-container">
+        <div class="icon-container">
+            <svg class="wifi-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 6.5c3.79 0 7.17 2.13 8.82 5.5-1.65 3.37-5.02 5.5-8.82 5.5S4.83 15.37 3.18 12C4.83 8.63 8.21 6.5 12 6.5m0-2C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zm0 5c1.38 0 2.5 1.12 2.5 2.5s-1.12 2.5-2.5 2.5-2.5-1.12-2.5-2.5 1.12-2.5 2.5-2.5m0-2c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5 4.5-2.02 4.5-4.5-2.02-4.5-4.5-4.5z"/>
+            </svg>
+        </div>
+
+        <h1>Bạn đang offline</h1>
+        <p>Không thể kết nối tới internet. Vui lòng kiểm tra kết nối mạng của bạn.</p>
+        
+        <button class="retry-button" onclick="retryConnection()">
+            Thử lại
+        </button>
+
+        <div class="cached-content">
+            <h2>Nội dung có sẵn offline</h2>
+            <ul class="cached-list" id="cachedList">
+                <!-- Will be populated by JavaScript -->
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Check connection status
+        function checkConnection() {
+            const status = navigator.onLine;
+            const indicator = document.querySelector('.status-indicator');
+            const statusText = document.querySelector('.connection-status');
+            
+            if (status) {
+                indicator.style.backgroundColor = '#2ecc71';
+                statusText.textContent = 'Online';
+                // Redirect to homepage if online
+                window.location.href = '/';
+            } else {
+                indicator.style.backgroundColor = '#e74c3c';
+                statusText.textContent = 'Offline';
+            }
+        }
+
+        // Retry connection
+        function retryConnection() {
+            const button = document.querySelector('.retry-button');
+            button.textContent = 'Đang thử lại...';
+            button.disabled = true;
+            
+            // Simulate checking connection
+            setTimeout(() => {
+                checkConnection();
+                button.textContent = 'Thử lại';
+                button.disabled = false;
+            }, 1500);
+        }
+
+        // List cached content
+        async function listCachedContent() {
+            try {
+                const cache = await caches.open('moji-code-cache-v1');
+                const keys = await cache.keys();
+                const list = document.getElementById('cachedList');
+                
+                list.innerHTML = keys.map(request => `
+                    <li class="cached-item">
+                        <i class="fas fa-file"></i>
+                        ${request.url.split('/').pop() || 'Homepage'}
+                    </li>
+                `).join('');
+            } catch (error) {
+                console.error('Error listing cached content:', error);
+            }
+        }
+
+        // Initialize
+        window.addEventListener('load', () => {
+            checkConnection();
+            listCachedContent();
+        });
+
+        // Listen for online/offline events
+        window.addEventListener('online', checkConnection);
+        window.addEventListener('offline', checkConnection);
+    </script>
+</body>
+</html>

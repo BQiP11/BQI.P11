@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moji Code - Nền tảng phát triển web thông minh</title>
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3498db">
+    <link rel="apple-touch-icon" href="/icons/icon-192x192.png">
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Moji Code - Nền tảng phát triển web thông minh với hỗ trợ AI, PWA và nhiều tính năng cao cấp">
+    <meta name="keywords" content="web development, AI, PWA, JavaScript, HTML, CSS, coding">
+    <meta name="author" content="Moji Code Team">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moji-code.app">
+    <meta property="og:title" content="Moji Code - Nền tảng phát triển web thông minh">
+    <meta property="og:description" content="Phát triển web thông minh với AI và PWA">
+    <meta property="og:image" content="https://moji-code.app/images/og-image.jpg">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://moji-code.app">
+    <meta name="twitter:title" content="Moji Code">
+    <meta name="twitter:description" content="Phát triển web thông minh với AI và PWA">
+    <meta name="twitter:image" content="https://moji-code.app/images/twitter-card.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/client/css/premium-components.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --accent-color: #e74c3c;
+            --background-color: #f5f6fa;
+            --text-color: #2c3e50;
+            --border-color: #dcdde1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-link:hover {
+            background-color: var(--background-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px;
+            margin-top: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            max-width: 600px;
+            margin: 0 auto 30px;
+        }
+
+        /* Features Grid */
+        .features {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        /* Editor Section */
+        .editor-section {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .editor {
+            background: #1e1e1e;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .editor-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .editor-tab {
+            padding: 8px 16px;
+            background: #2d2d2d;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .editor-tab.active {
+            background: var(--primary-color);
+        }
+
+        .editor-content {
+            font-family: 'Fira Code', monospace;
+            color: #fff;
+            line-height: 1.5;
+        }
+
+        /* AI Assistant */
+        .ai-assistant {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .ai-button {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .ai-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Media Gallery */
+        .media-gallery {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        .footer {
+            background: white;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-column h3 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .editor {
+                overflow-x: auto;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-logo">Moji Code</a>
+            <div class="nav-menu">
+                <a href="#features" class="nav-link">Tính năng</a>
+                <a href="#editor" class="nav-link">Editor</a>
+                <a href="#gallery" class="nav-link">Thư viện</a>
+                <a href="#contact" class="nav-link">Liên hệ</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Phát triển Web Thông minh</h1>
+        <p>Tận dụng sức mạnh của AI và công nghệ hiện đại để xây dựng website tuyệt vời</p>
+        <button id="startButton" class="retry-button">Bắt đầu ngay</button>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="features">
+        <div class="feature-card animate-fadeIn">
+            <i class="fas fa-robot feature-icon"></i>
+            <h3>AI Assistant</h3>
+            <p>Trợ lý AI thông minh giúp tối ưu code và gợi ý cải thiện.</p>
+        </div>
+        <div class="feature-card animate-fadeIn">
+            <i class="fas fa-mobile-alt feature-icon"></i>
+            <h3>PWA Support</h3>
+            <p>Ứng dụng web có thể cài đặt và hoạt động offline.</p>
+        </div>
+        <div class="feature-card animate-fadeIn">
+            <i class="fas fa-database feature-icon"></i>
+            <h3>Local Database</h3>
+            <p>Lưu trữ dữ liệu cục bộ với IndexedDB.</p>
+        </div>
+        <div class="feature-card animate-fadeIn">
+            <i class="fas fa-code feature-icon"></i>
+            <h3>Rich Editor</h3>
+            <p>Trình soạn thảo code với nhiều tính năng cao cấp.</p>
+        </div>
+        <div class="feature-card animate-fadeIn">
+            <i class="fas fa-images feature-icon"></i>
+            <h3>Media Management</h3>
+            <p>Quản lý và tối ưu hình ảnh, video một cách dễ dàng.</p>
+        </div>
+        <div class="feature-card animate-fadeIn">
+            <i class="fas fa-chart-line feature-icon"></i>
+            <h3>SEO Optimization</h3>
+            <p>Tối ưu hóa website cho các công cụ tìm kiếm.</p>
+        </div>
+    </section>
+
+    <!-- Editor Section -->
+    <section id="editor" class="editor-section">
+        <div class="editor">
+            <div class="editor-header">
+                <div class="editor-tabs">
+                    <div class="editor-tab active">index.html</div>
+                    <div class="editor-tab">style.css</div>
+                    <div class="editor-tab">script.js</div>
+                </div>
+            </div>
+            <div class="editor-content">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Hello World&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome to Moji Code&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Gallery -->
+    <section id="gallery" class="media-gallery">
+        <h2>Thư viện Media</h2>
+        <div class="gallery-grid">
+            <!-- Gallery items will be dynamically added here -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Về chúng tôi</h3>
+                <ul>
+                    <li><a href="/about">Giới thiệu</a></li>
+                    <li><a href="/team">Đội ngũ</a></li>
+                    <li><a href="/careers">Tuyển dụng</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Tài nguyên</h3>
+                <ul>
+                    <li><a href="/docs">Tài liệu</a></li>
+                    <li><a href="/tutorials">Hướng dẫn</a></li>
+                    <li><a href="/examples">Ví dụ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Hỗ trợ</h3>
+                <ul>
+                    <li><a href="/support">Trung tâm hỗ trợ</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/contact">Liên hệ</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Theo dõi</h3>
+                <ul>
+                    <li><a href="#"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-discord"></i> Discord</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AI Assistant Button -->
+    <div class="ai-assistant">
+        <button class="ai-button" id="aiButton">
+            <i class="fas fa-robot"></i>
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/client/js/components.js" type="module"></script>
+    <script src="/client/js/ai-assistant.js" type="module"></script>
+    <script src="/client/js/database.js" type="module"></script>
+
+    <script>
+        // Initialize components
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Register service worker
+            if ('serviceWorker' in navigator) {
+                try {
+                    const registration = await navigator.serviceWorker.register('/service-worker.js');
+                    console.log('Service Worker registered:', registration);
+                } catch (error) {
+                    console.error('Service Worker registration failed:', error);
+                }
+            }
+
+            // Initialize database
+            const db = new DatabaseManager('moji-code-db');
+            await db.initialize();
+
+            // Initialize AI assistant
+            const ai = new AIAssistant('your-api-key-here');
+            await ai.initialize();
+
+            // Setup AI button
+            const aiButton = document.getElementById('aiButton');
+            aiButton.addEventListener('click', () => {
+                // Show AI assistant dialog
+                PremiumComponents.createModal({
+                    title: 'AI Assistant',
+                    body: `
+                        <div style="padding: 20px;">
+                            <p>Chào bạn! Tôi có thể giúp gì cho bạn?</p>
+                            <textarea style="width: 100%; min-height: 100px; margin: 10px 0; padding: 10px;"></textarea>
+                        </div>
+                    `,
+                    footer: `
+                        <button class="retry-button" onclick="sendToAI()">Gửi</button>
+                    `
+                });
+            });
+
+            // Example: Add a post
+            const postButton = document.getElementById('startButton');
+            postButton.addEventListener('click', async () => {
+                try {
+                    await db.createPost({
+                        title: 'Welcome to Moji Code',
+                        content: 'Getting started with web development...',
+                        author: 'AI Assistant'
+                    });
+                    PremiumComponents.createToast('Đã tạo bài viết mới!', 'success');
+                } catch (error) {
+                    PremiumComponents.createToast('Lỗi khi tạo bài viết', 'error');
+                }
+            });
+
+            // Load media gallery
+            const gallery = document.querySelector('.gallery-grid');
+            const media = await db.getPosts({ type: 'media' });
+            media.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `<img src="${item.data}" alt="${item.name}">`;
+                gallery.appendChild(div);
+            });
+
+            // Example: Upload media
+            const uploader = PremiumComponents.createImageUploader({
+                onUpload: async (file) => {
+                    try {
+                        await db.uploadMedia(file);
+                        PremiumComponents.createToast('Tải lên thành công!', 'success');
+                    } catch (error) {
+                        PremiumComponents.createToast('Lỗi khi tải lên', 'error');
+                    }
+                }
+            });
+            document.querySelector('.media-gallery').insertBefore(uploader, gallery);
+        });
+
+        // Send message to AI
+        async function sendToAI() {
+            const textarea = document.querySelector('.modal-body textarea');
+            const message = textarea.value;
+            
+            if (!message.trim()) {
+                PremiumComponents.createToast('Vui lòng nhập nội dung', 'warning');
+                return;
+            }
+
+            try {
+                const ai = new AIAssistant('your-api-key-here');
+                const response = await ai.generateCode(message);
+                
+                // Show response in a new modal
+                PremiumComponents.createModal({
+                    title: 'Phản hồi từ AI',
+                    body: `<pre><code>${response}</code></pre>`
+                });
+            } catch (error) {
+                PremiumComponents.createToast('Lỗi khi xử lý yêu cầu', 'error');
+            }
+        }
+    </script>
+</body>
+</html>
