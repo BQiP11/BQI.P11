@@ -5,6 +5,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moji Code - Modern Development Platform</title>
     
+    <!-- Performance & Animation -->
+    <script type="module">
+        import { PerformanceOptimizer } from './client/js/performance.js';
+        import { AnimationController } from './client/js/animations.js';
+        
+        // Initialize performance optimization
+        const optimizer = new PerformanceOptimizer();
+        optimizer.optimizePerformance();
+        
+        // Initialize animations
+        const animationController = new AnimationController();
+        
+        // Monitor performance
+        optimizer.addObserver('fps', (fps) => {
+            if (fps < 30) {
+                // Reduce animation complexity when FPS is low
+                document.body.classList.add('reduce-animations');
+            } else {
+                document.body.classList.remove('reduce-animations');
+            }
+        });
+        
+        // Preload critical resources
+        optimizer.preloadResources([
+            { url: '/client/css/premium-components.css', type: 'style' },
+            { url: '/client/js/three-effects.js', type: 'script' }
+        ]);
+        
+        // Cache important assets
+        optimizer.cacheResources([
+            '/client/css/premium-components.css',
+            '/client/js/three-effects.js',
+            '/client/js/animations.js',
+            '/icons/favicon-32x32.png'
+        ]);
+    </script>
+    
     <!-- PWA Support -->
     <link rel="manifest" href="./manifest.json">
     <meta name="theme-color" content="#0a192f">

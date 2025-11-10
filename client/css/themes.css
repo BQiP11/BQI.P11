@@ -1,0 +1,124 @@
+/* Color Theme Variables */
+:root {
+    /* Cyberpunk Theme */
+    --cyber-primary: #0a192f;
+    --cyber-secondary: #112240;
+    --cyber-accent: #64ffda;
+    --cyber-accent-alt: #bd93f9;
+    --cyber-text: #e6f1ff;
+    --cyber-text-alt: #8892b0;
+
+    /* Neon Theme */
+    --neon-primary: #000000;
+    --neon-secondary: #1a1a1a;
+    --neon-accent: #ff00ff;
+    --neon-accent-alt: #00ffff;
+    --neon-text: #ffffff;
+    --neon-text-alt: #cccccc;
+
+    /* Synthwave Theme */
+    --synth-primary: #2b1055;
+    --synth-secondary: #7597de;
+    --synth-accent: #ff2a6d;
+    --synth-accent-alt: #05d9e8;
+    --synth-text: #ffffff;
+    --synth-text-alt: #d1d7e0;
+
+    /* Matrix Theme */
+    --matrix-primary: #000000;
+    --matrix-secondary: #0f0f0f;
+    --matrix-accent: #00ff00;
+    --matrix-accent-alt: #003300;
+    --matrix-text: #00ff00;
+    --matrix-text-alt: #006600;
+
+    /* Holographic Theme */
+    --holo-primary: rgba(16, 16, 32, 0.9);
+    --holo-secondary: rgba(32, 32, 64, 0.8);
+    --holo-accent: rgba(100, 255, 218, 0.9);
+    --holo-accent-alt: rgba(189, 147, 249, 0.9);
+    --holo-text: rgba(230, 241, 255, 0.95);
+    --holo-text-alt: rgba(136, 146, 176, 0.9);
+
+    /* Common Effects */
+    --glow-small: 0 0 5px;
+    --glow-medium: 0 0 10px;
+    --glow-large: 0 0 20px;
+    --glow-huge: 0 0 40px;
+}
+
+/* Theme Classes */
+.theme-cyber {
+    --theme-primary: var(--cyber-primary);
+    --theme-secondary: var(--cyber-secondary);
+    --theme-accent: var(--cyber-accent);
+    --theme-accent-alt: var(--cyber-accent-alt);
+    --theme-text: var(--cyber-text);
+    --theme-text-alt: var(--cyber-text-alt);
+}
+
+.theme-neon {
+    --theme-primary: var(--neon-primary);
+    --theme-secondary: var(--neon-secondary);
+    --theme-accent: var(--neon-accent);
+    --theme-accent-alt: var(--neon-accent-alt);
+    --theme-text: var(--neon-text);
+    --theme-text-alt: var(--neon-text-alt);
+}
+
+.theme-synthwave {
+    --theme-primary: var(--synth-primary);
+    --theme-secondary: var(--synth-secondary);
+    --theme-accent: var(--synth-accent);
+    --theme-accent-alt: var(--synth-accent-alt);
+    --theme-text: var(--synth-text);
+    --theme-text-alt: var(--synth-text-alt);
+}
+
+.theme-matrix {
+    --theme-primary: var(--matrix-primary);
+    --theme-secondary: var(--matrix-secondary);
+    --theme-accent: var(--matrix-accent);
+    --theme-accent-alt: var(--matrix-accent-alt);
+    --theme-text: var(--matrix-text);
+    --theme-text-alt: var(--matrix-text-alt);
+}
+
+.theme-holographic {
+    --theme-primary: var(--holo-primary);
+    --theme-secondary: var(--holo-secondary);
+    --theme-accent: var(--holo-accent);
+    --theme-accent-alt: var(--holo-accent-alt);
+    --theme-text: var(--holo-text);
+    --theme-text-alt: var(--holo-text-alt);
+}
+
+/* Color Utilities */
+.text-gradient {
+    background: linear-gradient(to right, var(--theme-accent), var(--theme-accent-alt));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.bg-gradient {
+    background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+}
+
+.glow-text {
+    text-shadow: var(--glow-small) var(--theme-accent),
+                 var(--glow-medium) var(--theme-accent-alt);
+}
+
+.glow-border {
+    border: 1px solid var(--theme-accent);
+    box-shadow: var(--glow-small) var(--theme-accent),
+                var(--glow-medium) var(--theme-accent-alt);
+}
+
+/* Dynamic Color Transitions */
+[class*="theme-"] * {
+    transition: background-color 0.3s ease,
+                color 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
