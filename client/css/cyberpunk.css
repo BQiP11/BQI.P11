@@ -1,0 +1,294 @@
+/* Modern Cyberpunk Theme */
+:root {
+    --primary-dark: #0a192f;
+    --secondary-dark: #112240;
+    --accent-blue: #64ffda;
+    --accent-purple: #bd93f9;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --neon-glow: 0 0 10px rgba(100, 255, 218, 0.5),
+                 0 0 20px rgba(100, 255, 218, 0.3),
+                 0 0 30px rgba(100, 255, 218, 0.1);
+}
+
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+body {
+    background: var(--primary-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* Modern Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-blue);
+    border-radius: 4px;
+}
+
+/* Neon Text Effect */
+.neon-text {
+    color: var(--accent-blue);
+    text-shadow: var(--neon-glow);
+    animation: neonPulse 2s infinite;
+}
+
+@keyframes neonPulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.8; }
+}
+
+/* Glassmorphism Cards */
+.glass-card {
+    background: rgba(17, 34, 64, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(100, 255, 218, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.glass-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neon-glow);
+}
+
+/* Modern Grid Layout */
+.modern-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    padding: 24px;
+}
+
+/* Futuristic Buttons */
+.cyber-button {
+    background: transparent;
+    color: var(--accent-blue);
+    border: 2px solid var(--accent-blue);
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: var(--accent-blue);
+    transition: transform 0.5s ease;
+    transform: translate(-50%, -50%) rotate(45deg) scale(0);
+    z-index: -1;
+}
+
+.cyber-button:hover {
+    color: var(--primary-dark);
+}
+
+.cyber-button:hover::before {
+    transform: translate(-50%, -50%) rotate(45deg) scale(1);
+}
+
+/* Animated Background */
+.cyber-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.1;
+    background: 
+        linear-gradient(45deg, transparent 48%, var(--accent-blue) 50%, transparent 52%),
+        linear-gradient(-45deg, transparent 48%, var(--accent-purple) 50%, transparent 52%);
+    background-size: 60px 60px;
+    animation: backgroundMove 30s linear infinite;
+}
+
+@keyframes backgroundMove {
+    from { background-position: 0 0; }
+    to { background-position: 60px 60px; }
+}
+
+/* Advanced Animations */
+.fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Modern Navigation */
+.cyber-nav {
+    background: rgba(10, 25, 47, 0.95);
+    backdrop-filter: blur(8px);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    padding: 16px 32px;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.1);
+}
+
+.nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin: 0 16px;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--accent-blue);
+}
+
+/* Floating Elements */
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* Terminal Effect */
+.terminal {
+    background: var(--secondary-dark);
+    border-radius: 8px;
+    padding: 20px;
+    font-family: 'Fira Code', monospace;
+}
+
+.terminal::before {
+    content: '$ ';
+    color: var(--accent-blue);
+}
+
+/* Glitch Effect */
+.glitch {
+    position: relative;
+    animation: glitch 1s linear infinite;
+}
+
+@keyframes glitch {
+    2%, 64% { transform: translate(2px, 0) skew(0deg); }
+    4%, 60% { transform: translate(-2px, 0) skew(0deg); }
+    62% { transform: translate(0, 0) skew(5deg); }
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    left: 0;
+}
+
+.glitch::before {
+    animation: glitchTop 1s linear infinite;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+@keyframes glitchTop {
+    2%, 64% { transform: translate(2px, -2px); }
+    4%, 60% { transform: translate(-2px, 2px); }
+    62% { transform: translate(13px, -1px) skew(-13deg); }
+}
+
+/* Modern Form Fields */
+.cyber-input {
+    background: rgba(17, 34, 64, 0.3);
+    border: 1px solid var(--accent-blue);
+    color: var(--text-primary);
+    padding: 12px 16px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.cyber-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--accent-blue);
+}
+
+/* Progress Bars */
+.cyber-progress {
+    height: 4px;
+    background: var(--secondary-dark);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.cyber-progress .bar {
+    height: 100%;
+    background: var(--accent-blue);
+    animation: progressMove 2s ease infinite;
+}
+
+@keyframes progressMove {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .modern-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cyber-nav {
+        padding: 12px 16px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .glass-card {
+        margin: 16px;
+    }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--secondary-dark);
+    border: none;
+    color: var(--accent-blue);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--neon-glow);
+    transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: rotate(180deg);
+}
